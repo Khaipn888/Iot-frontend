@@ -8,8 +8,11 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { apiLogin } from "../apis/user";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -22,7 +25,7 @@ const Login = () => {
 
   const handleSendEmail = () => {
     handleClose();
-  }
+  };
 
   const [dataForm, setDataForm] = useState({
     email: "",
@@ -54,36 +57,37 @@ const Login = () => {
     } else {
       setValidate((prev) => ({ ...prev, email: false }));
     }
-    if (!problem) console.log(dataForm);
+    if (!problem) {
+      apiLogin(dataForm);
+      navigate('/');
+    }
   };
 
   return (
     <>
-      
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Get password by email</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To get your password, please enter your email address here. We will
+            send the password to your email.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Email Address"
+            type="email"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleSendEmail}>Ok</Button>
+        </DialogActions>
+      </Dialog>
 
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Get password by email</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              To get your password, please enter your email address
-              here. We will send the password to your email.
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Email Address"
-              type="email"
-              fullWidth
-              variant="standard"
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSendEmail}>Ok</Button>
-          </DialogActions>
-        </Dialog>
-      
       <div className="login-container d-flex flex-column justify-content-center">
         <div className="login-form p-5 pt-4 rounded-2 mx-auto bg-white">
           <form>
@@ -120,7 +124,9 @@ const Login = () => {
                   No account? <Link to="/register">Register</Link>
                 </small>
                 <span className="">
-                  <small className="forgot-password" onClick={handleClickOpen}>Forgot password?</small>
+                  <small className="forgot-password" onClick={handleClickOpen}>
+                    Forgot password?
+                  </small>
                 </span>
               </div>
               <button

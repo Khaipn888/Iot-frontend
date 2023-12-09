@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../assets/styles/login.css";
 import { Link } from "react-router-dom";
+import { apiRegister } from "../apis/user";
 
 const Register = () => {
   const [dataForm, setDataForm] = useState({
@@ -41,7 +42,9 @@ const Register = () => {
       } else {
         setValidate((prev) => ({ ...prev, name: false }));
       }
-    if (!problem) console.log(dataForm);
+    if (!problem) {
+        apiRegister(dataForm);
+    };
   };
 
   return (
