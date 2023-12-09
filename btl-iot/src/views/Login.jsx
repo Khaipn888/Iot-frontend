@@ -116,11 +116,11 @@ const Login = () => {
                 )}
               </div>
               <div className="d-flex justify-content-between">
-                <span className="">
+                <small className="">
                   No account? <Link to="/register">Register</Link>
-                </span>
+                </small>
                 <span className="">
-                  <span className="forgot-password" onClick={handleClickOpen}>Forgot password?</span>
+                  <small className="forgot-password" onClick={handleClickOpen}>Forgot password?</small>
                 </span>
               </div>
               <button

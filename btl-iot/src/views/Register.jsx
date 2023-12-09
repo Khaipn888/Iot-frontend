@@ -89,9 +89,9 @@ const Register = () => {
               )}
             </div>
             <div className="d-flex justify-content-between">
-              <span className="">
+              <small className="">
                 Have account? <Link to="/login">Login</Link>
-              </span>
+              </small>
             </div>
             <button
               className="btn btn-primary p-1 w-50 mx-auto"
