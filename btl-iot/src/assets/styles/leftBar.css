@@ -1,0 +1,14 @@
+.left-bar {
+    height: 100vh !important;
+    background-color: #b9b9b9;
+    width: 10rem !important;
+}
+
+.user .avatar {
+    width: 60px;
+    height: 60px;
+}
+.logo ion-icon {
+    width: 80px;
+    height: 80px;
+}

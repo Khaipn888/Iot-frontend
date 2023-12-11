@@ -10,11 +10,21 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { apiLogin } from "../apis/user";
 import { useNavigate } from "react-router-dom";
+import { Alert, Snackbar } from "@mui/material";
 
 const Login = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
 
+  // handle open alert
+  const handleCloseAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenAlert(false);
+  };
+  ///
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -58,13 +68,31 @@ const Login = () => {
       setValidate((prev) => ({ ...prev, email: false }));
     }
     if (!problem) {
-      apiLogin(dataForm);
-      navigate('/');
+      apiLogin(dataForm)
+        .then(() => navigate("/"))
+        .catch((err) => {
+          console.log(err.response.data.reason);
+          //alert "Email or password incorrect"
+          setOpenAlert(true);
+        });
     }
   };
 
   return (
     <>
+      <Snackbar
+        open={openAlert}
+        autoHideDuration={6000}
+        onClose={handleCloseAlert}
+      >
+        <Alert
+          onClose={handleCloseAlert}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          Email or password incorrect
+        </Alert>
+      </Snackbar>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Get password by email</DialogTitle>
         <DialogContent>

@@ -1,6 +1,4 @@
-import axios from "axios";
-
-const setAuthHeader = (token) => {
+const setAuthHeader = (axios, token) => {
   if (token) {
     axios.defaults.headers = {
       Authorization: "Bearer " + token,
