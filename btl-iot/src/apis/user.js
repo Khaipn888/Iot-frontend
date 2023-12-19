@@ -1,6 +1,7 @@
 import axiosConfig from "../utils/axiosConfig";
 import setAuthHeader from "../utils/setAuthHeader";
 
+
 export const apiRegister = (payload) =>
   new Promise(async (resolve, reject) => {
     try {
@@ -9,7 +10,7 @@ export const apiRegister = (payload) =>
         email: payload.email,
         password: payload.password,
       });
-      console.log(response.data.result);
+      
       resolve(response.data.result);
     } catch (error) {
       reject(error);
@@ -24,43 +25,33 @@ export const apiRegister = (payload) =>
         email: payload.email,
         password: payload.password,
       });
-      console.log(response);
-      setAuthHeader(axiosConfig, response.data.user.accessToken);
+      
       if (response.data.token !== null) {
         localStorage.setItem(
           "token",
           response.data.user.accessToken.toString()
         );
+        setAuthHeader(axiosConfig);
       }
-      console.log(response.data.result);
-      resolve(response.data.result);
+      resolve(response.data);
     } catch (error) {
       reject(error);
     }
   });
 
-// export const apiLogin = async (payload) => {
-//   await axiosConfig
-//     .post("/api/v1/user/sign-in", {
-//       email: payload.email,
-//       password: payload.password,
-//     })
-//     .then((response) => {
-//       setAuthHeader(response.data.user.accessToken);
-//       if (response.data.token !== null) {
-//         localStorage.setItem(
-//           "token",
-//           JSON.stringify(response.data.user.accessToken)
-//         );
-//       }
-//     })
-//     .catch((err) => console.log(err));
-// };
+  export const apiGetUser = (id) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
+  });
+
 
 export const apiLouout = () => new Promise( async (resolve, reject) => {
   try {
-    const token = localStorage.getItem("token");
-    setAuthHeader(axiosConfig, token);
+    setAuthHeader(axiosConfig);
     const response = await axiosConfig
     .post("/api/v1/user/sign-out")
     localStorage.removeItem("token");

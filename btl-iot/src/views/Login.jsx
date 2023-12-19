@@ -11,9 +11,12 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { apiLogin } from "../apis/user";
 import { useNavigate } from "react-router-dom";
 import { Alert, Snackbar } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/reducer/user";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const [open, setOpen] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
 
@@ -69,9 +72,13 @@ const Login = () => {
     }
     if (!problem) {
       apiLogin(dataForm)
-        .then(() => navigate("/"))
+        .then((res) => {
+          console.log(res);
+          dispatch(login(res.user));
+          navigate("/");
+        })
         .catch((err) => {
-          console.log(err.response.data.reason);
+          console.log(err);
           //alert "Email or password incorrect"
           setOpenAlert(true);
         });

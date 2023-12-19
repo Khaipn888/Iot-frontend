@@ -1,4 +1,5 @@
-const setAuthHeader = (axios, token) => {
+const setAuthHeader = (axios) => {
+  const token = localStorage.getItem("token");
   if (token) {
     axios.defaults.headers = {
       Authorization: "Bearer " + token,

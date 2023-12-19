@@ -7,6 +7,7 @@ import { RouterProvider } from "react-router-dom";
 import router from "./routes";
 import store from "./redux/store";
 import { Provider } from "react-redux";
+import "./assets/styles/global.css"
 //import  RedirectRouter  from "./routes/RedirectRouter"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
