@@ -2,3 +2,12 @@
     width: 50% !important;
     height: auto !important;
 }
+.input-addroom {
+    border: none;
+    border-bottom: 1px solid rgb(150, 150, 150);
+    outline: none;
+}
+.MuiBox-root {
+    padding: 15px 30px !important;
+    border-radius: 10px;
+}
