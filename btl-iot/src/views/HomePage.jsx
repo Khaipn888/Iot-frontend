@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import "../assets/styles/room.css";
+import RoomChart from "../components/RoomChart";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -80,6 +81,7 @@ function HomePage() {
       <LeftBar />
       <div className=" col-2 p-0"></div>
       <div className="col-10 p-0">
+        <RoomChart/>
         <div className="add-room pt-4 ps-5">
           <button className="btn btn-danger " onClick={handleOpenModal}>
             Thêm Phòng
