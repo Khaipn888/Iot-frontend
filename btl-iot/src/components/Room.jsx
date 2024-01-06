@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import "../assets/styles/room.css";
-const Room = ({ roomName, lamps, curtains }) => {
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogTitle from '@mui/material/DialogTitle';
+import { apiDeleteRoom } from "../apis/room";
+
+const Room = ({ roomId, roomName, lamps, curtains }) => {
   const [room, setRoom] = useState({
     name: "",
     lamp: "",
@@ -8,14 +14,48 @@ const Room = ({ roomName, lamps, curtains }) => {
     mode: "",
   });
 
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleDeleteRoom = () => {
+    console.log("room id: ", roomId);
+    apiDeleteRoom(roomId);
+    handleClose();
+  }
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
   return (
     <div className="room-container rounded-2 shadow-lg bg-white p-3 ">
       <div className="d-flex justify-content-between ">
         <span className="">
           <h2>{roomName}</h2>
         </span>
-        <div className="cursor-pointer">
-          <ion-icon name="create"></ion-icon>
+        <div className="cursor-pointer gap-2">
+          <button className="btn btn-outline-info py-0 mx-1">Xem</button>
+          <button className="btn btn-outline-danger py-0 mx-1" onClick={handleClickOpen}>
+        Xóa
+      </button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {`Do you want to delete ${roomName} ?`}
+        </DialogTitle>
+        <DialogActions>
+          <Button onClick={handleDeleteRoom}>Yes</Button>
+          <Button onClick={handleClose} autoFocus>
+            No
+          </Button>
+        </DialogActions>
+      </Dialog>
         </div>
       </div>
       <div className="info">

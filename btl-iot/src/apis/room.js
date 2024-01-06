@@ -36,3 +36,18 @@ export const apiGetDetail = (roomId) =>
       reject(error);
     }
   });
+
+  export const apiDeleteRoom = (roomId) =>
+  new Promise( async (resolve, reject) => {
+    try {
+      console.log("api delete room", roomId);
+      setAuthHeader(axiosConfig);
+      const response = await axiosConfig.post("/api/v1/room/delete", {
+        roomId: roomId,
+      });
+
+      resolve(response.data);
+    } catch (error) {
+      reject(error);
+    }
+  });

@@ -58,7 +58,7 @@ function HomePage() {
         roomsInfoNew.push(item);
       }
     });
-    console.log(roomsInfoNew);
+    //console.log(roomsInfoNew);
     return roomsInfoNew;
   };
   useEffect(() => {
@@ -143,10 +143,11 @@ function HomePage() {
           {roomsInfo.length > 0 &&
             removeDuplicates(roomsInfo).map((item) => (
               <Room
-                key={item.roomId}
+                key={item.room.roomId}
                 roomName={item.room.name}
                 lamps={item.lamps}
                 curtains={item.windows}
+                roomId={item.room.roomId}
               />
             ))}
         </div>
