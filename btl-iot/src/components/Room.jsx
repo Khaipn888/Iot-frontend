@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import "../assets/styles/room.css";
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogTitle from '@mui/material/DialogTitle';
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogTitle from "@mui/material/DialogTitle";
 import { apiDeleteRoom } from "../apis/room";
+import { useSelector, useDispatch } from "react-redux";
+import { setRoom } from "../redux/reducer/room";
+import { useNavigate } from "react-router-dom";
+import { deleteRoom, deleteLamp } from "../redux/reducer/room";
 
-const Room = ({ roomId, roomName, lamps, curtains }) => {
+const Room = ({ roomId, roomName, lamps, curtains, onDeleteRoom }) => {
   const [room, setRoom] = useState({
     name: "",
     lamp: "",
     curtain: "",
     mode: "",
   });
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -22,12 +27,16 @@ const Room = ({ roomId, roomName, lamps, curtains }) => {
   const handleDeleteRoom = () => {
     console.log("room id: ", roomId);
     apiDeleteRoom(roomId);
+    onDeleteRoom(roomId);
+    dispatch(deleteRoom(roomId));
     handleClose();
-  }
+  };
   const handleClose = () => {
     setOpen(false);
   };
-
+  const redirectToRoomDetail = () => {
+    navigate(`/room/${roomId}`);
+  };
 
   return (
     <div className="room-container rounded-2 shadow-lg bg-white p-3 ">
@@ -36,26 +45,34 @@ const Room = ({ roomId, roomName, lamps, curtains }) => {
           <h2>{roomName}</h2>
         </span>
         <div className="cursor-pointer gap-2">
-          <button className="btn btn-outline-info py-0 mx-1">Xem</button>
-          <button className="btn btn-outline-danger py-0 mx-1" onClick={handleClickOpen}>
-        Xóa
-      </button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {`Do you want to delete ${roomName} ?`}
-        </DialogTitle>
-        <DialogActions>
-          <Button onClick={handleDeleteRoom}>Yes</Button>
-          <Button onClick={handleClose} autoFocus>
-            No
-          </Button>
-        </DialogActions>
-      </Dialog>
+          <button
+            className="btn btn-outline-info py-0 mx-1"
+            onClick={redirectToRoomDetail}
+          >
+            Xem
+          </button>
+          <button
+            className="btn btn-outline-danger py-0 mx-1"
+            onClick={handleClickOpen}
+          >
+            Xóa
+          </button>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              {`Do you want to delete ${roomName} ?`}
+            </DialogTitle>
+            <DialogActions>
+              <Button onClick={handleDeleteRoom}>Yes</Button>
+              <Button onClick={handleClose} autoFocus>
+                No
+              </Button>
+            </DialogActions>
+          </Dialog>
         </div>
       </div>
       <div className="info">

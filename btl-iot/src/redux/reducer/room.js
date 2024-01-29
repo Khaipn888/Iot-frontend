@@ -6,17 +6,24 @@ export const roomSlice = createSlice({
   name: "room",
   initialState: {
     rooms: [],
-    currentRoom: {
-      room: { connect: [], roomId: "", user: "", name: "" },
-      lamps: [],
-      windows: [],
-    },
+    currentRoom: {},
     roomsInfo: [],
   },
   reducers: {
-    resetRoomsInfo: (state) => {
-
+    setRoom: (state, action) => {
+      console.log("set room reducer");
+      state.currentRoom = action.payload;
+      console.log(state.currentRoom);
     }, 
+    deleteRoom: (state, action) => {
+      state.roomsInfo = state.roomsInfo.filter(item => item.room.roomId !== action.payload);
+    },
+    deleteLamp: (state, action) => {
+      state.currentRoom.lamps = state.currentRoom.lamps.filter(item => item.lampId !== action.payload);
+    },
+    deleteWindow: (state, action) => {
+      state.currentRoom.windows = state.currentRoom.windows.filter(item => item.windowId !== action.payload);
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -47,6 +54,6 @@ export const roomDetailThunk = createAsyncThunk("roomsDetail", (id) =>
 );
 
 // Action creators are generated for each case reducer function
-export const {resetRoomsInfo } = roomSlice.actions;
+export const {setRoom, deleteRoom, deleteLamp, deleteWindow } = roomSlice.actions;
 
 export default roomSlice.reducer;

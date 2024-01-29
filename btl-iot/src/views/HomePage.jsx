@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import LeftBar from "../components/LeftBar";
 import Room from "../components/Room";
 import { useSelector, useDispatch } from "react-redux";
-import { roomsThunk, roomDetailThunk } from "../redux/reducer/room";
+import { roomsThunk, roomDetailThunk, deleteRoom } from "../redux/reducer/room";
 import { apiCreateRoom } from "../apis/room";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -46,8 +46,14 @@ function HomePage() {
     setNewRoom(newRoomCpy);
   };
   const addRoom = () => {
-    apiCreateRoom(newRoom);
+    apiCreateRoom(newRoom)
+      .then(() => dispatch(roomsThunk()))
+      .catch((err) => console.log(err));
     handleCloseModal();
+  };
+
+  const handleDeleteRoom = (id) => {
+    dispatch(deleteRoom(id));
   };
   const removeDuplicates = (arr) => {
     const roomsIds = [];
@@ -148,6 +154,7 @@ function HomePage() {
                 lamps={item.lamps}
                 curtains={item.windows}
                 roomId={item.room.roomId}
+                onDeleteRoom={handleDeleteRoom}
               />
             ))}
         </div>
