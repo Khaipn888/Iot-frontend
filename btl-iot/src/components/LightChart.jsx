@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 
-function RoomChart() {
+function LightChart() {
   const [socketUrl, setSocketUrl] = useState(
     "wss://binht1-iot-smarthome-be.onrender.com"
   );
@@ -59,17 +59,8 @@ function RoomChart() {
     <LineChart width={900} height={400} data={dataChart} margin={{ top: 60 }}>
       <Line
         type="monotone"
-        dataKey="humidity"
-        stroke="#65B741"
-        strokeWidth={2}
-        legendType="line"
-        dot={false}
-        isAnimationActive={false}
-      />
-      <Line
-        type="monotone"
-        dataKey="temperature"
-        stroke="#7360DF"
+        dataKey="lightIntensity"
+        stroke="#FF0000"
         strokeWidth={2}
         legendType="line"
         dot={false}
@@ -95,4 +86,4 @@ function RoomChart() {
   );
 }
 
-export default RoomChart;
+export default LightChart;
