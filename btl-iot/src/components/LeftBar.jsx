@@ -20,7 +20,7 @@ useEffect(() => {
     <div className="left-bar pt-2 pb-5 d-flex flex-column justify-content-between align-items-center position-fixed top-0 start-0 ">
       <div className="w-100 d-flex flex-column justify-content-between align-items-center">
         <div className="logo w-50 h-25 mx-auto mb-5 text-center">
-          <ion-icon name="logo-electron"></ion-icon>
+          <ion-icon name="logo-electron" onClick={navigate("/")}></ion-icon>
         </div>
         <div className="user w-50 mt-2">
           <div className="avatar mx-auto rounded-circle  overflow-hidden">

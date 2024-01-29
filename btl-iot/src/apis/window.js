@@ -48,14 +48,14 @@ export const apiChangeMode = (windowId, mode) =>
     }
   });
 
-export const apiControlManual = (windowId, status) =>
+export const apiControlManual = (windowId, status, height) =>
   new Promise(async (resolve, reject) => {
     try {
       console.log("api control manual window", windowId);
       setAuthHeader(axiosConfig);
       const response = await axiosConfig.post("/api/v1/window/control-manual", {
         windowId: windowId,
-        status: status,
+        status: status*height,
       });
       resolve(response.data);
     } catch (error) {

@@ -95,7 +95,7 @@ const Window = ({
   const [manualStatus, setManualStatus] = useState(status);
   const changeStatus = (event) => {
     setManualStatus(event.target.value);
-    apiControlManual(windowId, event.target.value);
+    apiControlManual(windowId, event.target.value, height);
   };
   // handle timer mode
   const [time, setTime] = useState(dayjs("2022-04-17T15:30"));

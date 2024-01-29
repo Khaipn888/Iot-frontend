@@ -26,6 +26,8 @@
     "react-router-dom": "^6.20.1",
     "react-scripts": "5.0.1",
     "react-three-toggle": "^0.5.2",
+    "react-use-websocket": "^4.5.0",
+    "recharts": "^2.11.0",
     "redux": "^5.0.0",
     "styled-components": "^6.1.8",
     "web-vitals": "^2.1.4"
