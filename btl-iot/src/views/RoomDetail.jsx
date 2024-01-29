@@ -97,8 +97,9 @@ const RoomDetail = () => {
     <div className="row mx-0">
       <LeftBar />
       <div className=" col-2 p-0"></div>
-      <div className=" col-10 p-5 ps-0">
+      <div className=" col-10 p-5 ps-0 pt-2">
         <div className="">
+          <div className="display-6 text-center fw-bold mb-2">{room?.room?.name}</div>
           <div className="w-100 h-100 p-4 bg-dark-subtle">
             <div className="chart">
               <br />

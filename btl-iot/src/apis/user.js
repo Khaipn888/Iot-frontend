@@ -31,8 +31,13 @@ export const apiRegister = (payload) =>
           "token",
           response.data.user.accessToken.toString()
         );
+        localStorage.setItem(
+        "user name",
+        response.data.user.fullname.toString()
+      );
         setAuthHeader(axiosConfig);
       }
+      
       resolve(response.data);
     } catch (error) {
       reject(error);
@@ -54,7 +59,7 @@ export const apiLouout = () => new Promise( async (resolve, reject) => {
     setAuthHeader(axiosConfig);
     const response = await axiosConfig
     .post("/api/v1/user/sign-out")
-    localStorage.removeItem("token");
+    localStorage.clear();
     resolve(response.data.result)
   } catch (error) {
     reject(error)

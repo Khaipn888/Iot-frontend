@@ -11,7 +11,7 @@ const LeftBar = () => {
     apiLouout();
     navigate("/login");
   }
-
+  const userName = localStorage.getItem('user name');
 useEffect(() => {
 
 })
@@ -26,7 +26,7 @@ useEffect(() => {
           <div className="avatar mx-auto rounded-circle  overflow-hidden">
             <img src={avt} className="w-100 object-fit-cover " />
           </div>
-          <p className="text-center fw-bold ">{user.fullname}</p>
+          <p className="text-center fw-bold ">{userName}</p>
         </div>
       </div>
       <div className="logout">
