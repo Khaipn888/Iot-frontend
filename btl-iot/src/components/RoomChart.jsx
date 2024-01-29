@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -8,14 +8,10 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import useWebSocket, { ReadyState } from "react-use-websocket";
 
 //Data là mảng
-const data = [
-  { name: "Page A", uv: 1400, pv: 1000, amt: 2400 },
-  { name: "Page B", uv: 1600, pv: 3000, amt: 2600 },
-  { name: "Page C", uv: 1500, pv: 2000, amt: 2500 },
-  { name: "Page D", uv: 1700, pv: 4000, amt: 2700 },
-];
+
 // const renderCustomAxisTick = ({ x, y, payload }) => {
 //   let path = '';
 //   switch (payload.value) {
@@ -37,16 +33,71 @@ const data = [
 // };
 
 function RoomChart() {
+  const [socketUrl, setSocketUrl] = useState(
+    "wss://binht1-iot-smarthome-be.onrender.com"
+  );
+  const [dataChart, setDataChart] = useState([]);
+  const [messageHistory, setMessageHistory] = useState([]);
+  const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
+
+  useEffect(() => {
+    if (lastMessage !== null) {
+      setMessageHistory((prev) => prev.concat(lastMessage));
+      console.log(lastMessage.data);
+
+      const tmpData = JSON.parse(lastMessage.data);
+      let { test, ...tmpData1 } = tmpData;
+
+      let now = new Date();
+      let hours = now.getHours();
+      let minutes = now.getMinutes();
+      let seconds = now.getSeconds();
+      let timeNow = `${hours}:${minutes}:${seconds}`;
+
+      const tmp = { name: timeNow, ...tmpData1 };
+
+      if (dataChart.length >= 10) {
+        dataChart.shift();
+      }
+      setDataChart([...dataChart, tmp]);
+    }
+  }, [lastMessage, setMessageHistory]);
+
+  useEffect(() => {
+    if (readyState === -1) {
+    }
+    if (readyState === 0) {
+    }
+    if (readyState === 1) {
+      sendMessage('{"test":"hello"}');
+    }
+    if (readyState === 2) {
+    }
+    if (readyState === 3) {
+    }
+  }, [readyState]);
+
   return (
-    <LineChart
-      width={900}
-      height={400}
-      data={data}
-      margin={{ top: 60}}
-    >
-    <Line type="monotone" dataKey="uv" stroke="#65B741" strokeWidth={2} legendType="line" dot={false}/>
-      <Line type="monotone" dataKey="pv" stroke="#7360DF" strokeWidth={2} legendType="line" dot={false}  />
-      <Line type="monotone" dataKey="amt" stroke="#EF4040" strokeWidth={2} legendType="line" dot={false}/>
+    <LineChart width={900} height={400} data={dataChart} margin={{ top: 60 }}>
+      <Line
+        type="monotone"
+        dataKey="humidity"
+        stroke="#65B741"
+        strokeWidth={2}
+        legendType="line"
+        dot={false}
+        isAnimationActive={false}
+      />
+      <Line
+        type="monotone"
+        dataKey="temperature"
+        stroke="#7360DF"
+        strokeWidth={2}
+        legendType="line"
+        dot={false}
+        isAnimationActive={false}
+      />
+
       <CartesianGrid stroke="#ccc" strokeDasharray="2 5" />
       <XAxis dataKey="name" />
       <YAxis />
