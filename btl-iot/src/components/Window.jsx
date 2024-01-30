@@ -135,7 +135,7 @@ const Window = ({
     listBreakpointsCpy.push(light + "-" + closeBp);
     setListBreakpoints(listBreakpointsCpy);
     //api change timer
-    apiChangeBreakpoints(windowId, listBreakpointsCpy);
+    apiChangeBreakpoints(windowId, listBreakpointsCpy, height);
   };
 
   const deleteBreakpoint = (index) => {
@@ -243,16 +243,16 @@ const Window = ({
                   onChange={handleChangeLight}
                 >
                   <MenuItem value={'0'}>0 cd</MenuItem>
-                  <MenuItem value={'5000'}>5000 cd</MenuItem>
-                  <MenuItem value={'10000'}>10000 cd</MenuItem>
-                  <MenuItem value={'15000'}>15000 cd</MenuItem>
-                  <MenuItem value={'20000'}>20000 cd</MenuItem>
-                  <MenuItem value={'25000'}>25000 cd</MenuItem>
-                  <MenuItem value={'30000'}>30000 cd</MenuItem>
-                  <MenuItem value={'35000'}>35000 cd</MenuItem>
-                  <MenuItem value={'40000'}>40000 cd</MenuItem>
-                  <MenuItem value={'45000'}>45000 cd</MenuItem>
-                  <MenuItem value={'50000'}>50000 cd</MenuItem>
+                  <MenuItem value={'200'}>200 cd</MenuItem>
+                  <MenuItem value={'400'}>400 cd</MenuItem>
+                  <MenuItem value={'600'}>600 cd</MenuItem>
+                  <MenuItem value={'800'}>800 cd</MenuItem>
+                  <MenuItem value={'1000'}>1000 cd</MenuItem>
+                  <MenuItem value={'1200'}>1200 cd</MenuItem>
+                  <MenuItem value={'1400'}>1400 cd</MenuItem>
+                  <MenuItem value={'1600'}>1600 cd</MenuItem>
+                  <MenuItem value={'1800'}>1800 cd</MenuItem>
+                  <MenuItem value={'2000'}>2000 cd</MenuItem>
                 </Select>
               </FormControl>
             </div>

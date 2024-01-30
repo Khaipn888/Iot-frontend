@@ -93,7 +93,7 @@ export const apiChangeTimer = (windowId, timers) =>
     }
   });
 
-export const apiChangeBreakpoints = (windowId, breakpoints) =>
+export const apiChangeBreakpoints = (windowId, breakpoints, height) =>
   new Promise(async (resolve, reject) => {
     try {
       console.log("api change breakpoints window", windowId);
