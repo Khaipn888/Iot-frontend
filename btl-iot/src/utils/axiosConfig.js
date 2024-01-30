@@ -1,6 +1,6 @@
 import axios from "axios";
 
 const axiosConfig = axios.create({
-  baseURL: "https://binht1-iot-smarthome-be.onrender.com",
+  baseURL: "https://localhost:8000",
 });
 export default axiosConfig;
