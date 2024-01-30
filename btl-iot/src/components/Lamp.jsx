@@ -84,16 +84,16 @@ const Lamp = ({ name, mode, lampId, status, breakpoint, timers }) => {
       label: "0cd",
     },
     {
-      value: 5000,
-      label: "5000",
+      value: 200,
+      label: "200cd",
     },
     {
-      value: 10000,
-      label: "10000",
+      value: 300,
+      label: "300cd",
     },
     {
-      value: 50000,
-      label: "50000cd",
+      value: 2000,
+      label: "2000cd",
     },
   ];
   const [breakpointValue, setBreakpointValue] = useState(breakpoint);
@@ -216,10 +216,10 @@ const Lamp = ({ name, mode, lampId, status, breakpoint, timers }) => {
               aria-label="Always visible"
               defaultValue={breakpoint}
               getAriaValueText={valuetext}
-              step={5000}
+              step={200}
               marks={marks}
               valueLabelDisplay="off"
-              max={50000}
+              max={2000}
               min={0}
               onChange={changeBreakpoint}
               color="error"
