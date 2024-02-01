@@ -110,7 +110,7 @@ const Window = ({
 
   const saveTime = () => {
     const listTimersCpy = [...listTimers];
-    listTimersCpy.push(time.format("HH:mm") + "-" + close);
+    listTimersCpy.push(time.format("HH:mm") + "-" + (close*height));
     setListTimers(listTimersCpy);
     console.log(listTimersCpy);
     //api change timer
@@ -138,7 +138,7 @@ const Window = ({
 
   const saveBreakpoints = () => {
     const listBreakpointsCpy = [...listBreakpoints];
-    listBreakpointsCpy.push(light + "-" + closeBp);
+    listBreakpointsCpy.push(light + "-" + (closeBp*height));
     setListBreakpoints(listBreakpointsCpy);
     //api change timer
     apiChangeBreakpoints(windowId, listBreakpointsCpy, height);
