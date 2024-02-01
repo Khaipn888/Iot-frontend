@@ -11,9 +11,7 @@ export const roomSlice = createSlice({
   },
   reducers: {
     setRoom: (state, action) => {
-      console.log("set room reducer");
       state.currentRoom = action.payload;
-      console.log(state.currentRoom);
     }, 
     deleteRoom: (state, action) => {
       state.roomsInfo = state.roomsInfo.filter(item => item.room.roomId !== action.payload);

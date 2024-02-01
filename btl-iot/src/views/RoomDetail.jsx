@@ -69,9 +69,11 @@ const RoomDetail = () => {
     newLampCpy.roomId = roomId;
     setNewLamp(newLampCpy);
     apiCreateLamp(newLampCpy);
-    apiGetDetail(roomId)
-      .then((res) => dispatch(setRoom(res.data)))
-      .catch((err) => console.log(err));
+    setTimeout(() => {
+      apiGetDetail(roomId)
+        .then((res) => dispatch(setRoom(res.data)))
+        .catch((err) => console.log(err));
+    }, 500);
     handleCloseModalLamp();
   };
   // ----------
@@ -87,9 +89,11 @@ const RoomDetail = () => {
     newWindowCpy.roomId = roomId;
     setNewWindow(newWindowCpy);
     apiCreateWindow(newWindowCpy);
-    apiGetDetail(roomId)
-      .then((res) => dispatch(setRoom(res.data)))
-      .catch((err) => console.log(err));
+    setTimeout(() => {
+      apiGetDetail(roomId)
+        .then((res) => dispatch(setRoom(res.data)))
+        .catch((err) => console.log(err));
+    }, 500);
     handleCloseModalWindow();
   };
 
@@ -99,7 +103,9 @@ const RoomDetail = () => {
       <div className=" col-2 p-0"></div>
       <div className=" col-10 p-5 ps-0 pt-2">
         <div className="">
-          <div className="display-6 text-center fw-bold mb-2">{room?.room?.name}</div>
+          <div className="display-6 text-center fw-bold mb-2">
+            {room?.room?.name}
+          </div>
           <div className="w-100 h-100 p-4 pb-0">
             <div className="chart">
               <Chart />
@@ -201,6 +207,7 @@ const RoomDetail = () => {
                     status={item.status}
                     breakpoint={item.breakpoint}
                     timers={item.timers}
+                    roomId={roomId}
                   />
                 ))}
             </div>
@@ -284,7 +291,10 @@ const RoomDetail = () => {
                     >
                       Cancel
                     </button>
-                    <button className="btn btn-success py-1" onClick={addWindow}>
+                    <button
+                      className="btn btn-success py-1"
+                      onClick={addWindow}
+                    >
                       Ok
                     </button>
                   </div>
@@ -312,6 +322,7 @@ const RoomDetail = () => {
                     height={item.height}
                     breakpoints={item.breakpoints}
                     timers={item.timers}
+                    roomId={roomId}
                   />
                 ))}
             </div>

@@ -28,12 +28,14 @@ import Slider from "@mui/material/Slider";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Timer from "./Timer";
+import { setRoom } from "../redux/reducer/room";
+import { apiGetDetail } from "../apis/room";
 
 function valuetext(value) {
   return `${value}cd`;
 }
 
-const Lamp = ({ name, mode, lampId, status, breakpoint, timers }) => {
+const Lamp = ({ name, mode, lampId, status, breakpoint, timers, roomId }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -47,6 +49,11 @@ const Lamp = ({ name, mode, lampId, status, breakpoint, timers }) => {
     apiDeleteLamp(lampId)
       .then(() => dispatch(deleteLamp(lampId)))
       .catch((err) => console.log(err));
+      setTimeout(() => {
+        apiGetDetail(roomId)
+          .then((res) => dispatch(setRoom(res.data)))
+          .catch((err) => console.log(err));
+      }, 500);
     handleClose();
   };
   // handle toggle

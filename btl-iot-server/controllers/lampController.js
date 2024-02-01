@@ -23,16 +23,16 @@ const lampController = {
         roomId: roomId,
       });
 
-      if (lamps) {
-        for (const lamp of lamps) {
-          if (lamp.name == name) {
-            return res.status(400).send({
-              result: 'fail',
-              message: 'Tên đèn đã tồn tại',
-            });
-          }
-        }
-      }
+      // if (lamps) {
+      //   for (const lamp of lamps) {
+      //     if (lamp.name == name) {
+      //       return res.status(400).send({
+      //         result: 'fail',
+      //         message: 'Tên đèn đã tồn tại',
+      //       });
+      //     }
+      //   }
+      // }
 
       for (var i = 0; i < roomConnect.length; i++) {
         if (roomConnect[i] == lampOrder) {

@@ -31,8 +31,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import WAutoList from "./WAutoList";
-import { apiChangeBreakpoint } from "../apis/lamp";
-
+import { setRoom } from "../redux/reducer/room";
+import { apiGetDetail } from "../apis/room";
 function valuetext(value) {
   return `${value}cd`;
 }
@@ -45,6 +45,7 @@ const Window = ({
   height,
   breakpoints,
   timers,
+  roomId
 }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -59,6 +60,11 @@ const Window = ({
     apiDeleteWindow(windowId)
       .then(() => dispatch(deleteWindow(windowId)))
       .catch((err) => console.log(err));
+      setTimeout(() => {
+        apiGetDetail(roomId)
+          .then((res) => dispatch(setRoom(res.data)))
+          .catch((err) => console.log(err));
+      }, 500);
     handleClose();
   };
   // handle toggle
